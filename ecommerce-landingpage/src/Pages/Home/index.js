@@ -4,24 +4,16 @@ import * as S from './styled'
 import {useHistory} from 'react-router-dom';
 
 function App(props) {
-  const history = useHistory();
   const [usuario, setUsuario] = useState('');
   const [erro, setErro] = useState(false);
 
-  function handlePesquisa(){
-    axios.get(`https://api.github.com/users/${usuario}/repos`).then(response => {
-      const repositories = response.data;
-      const repositoriesName = [];
-      repositories.map((repository) => {
-        repositoriesName.push(repository.name);
-      });
-      localStorage.setItem('repositoriesName', JSON.stringify(repositoriesName));
-      setErro(false);
-      history.push('/repositories');
-  })
-  .catch(err => {
-    setErro(true);
-  });
+  function cadastro(){
+    let user = {usuario};
+    let msg = '';
+    localStorage.setItem('user', JSON.stringify(usuario));
+    let userString = localStorage.getItem('user');
+    let pessoaObj = JSON.parse(userString);
+    console.log(pessoaObj.nome); 
   }
 
   return (
@@ -48,17 +40,17 @@ function App(props) {
         <S.ListItem><S.Texto>Tênis meia preto (tamanhos até 45)</S.Texto></S.ListItem>
     </S.ListProduct>
     <S.ListProduct>
-        <S.ListPreco><S.Texto>R$15,99</S.Texto></S.ListPreco>
-        <S.ListPreco><S.Texto>R$25,99</S.Texto></S.ListPreco>
-        <S.ListPreco><S.Texto>R$125,00</S.Texto></S.ListPreco>
+        <S.ButtonBuy type="button" id="button2">R$15,99</S.ButtonBuy>
+        <S.ButtonBuy type="button" id="button3">R$25,99</S.ButtonBuy>
+        <S.ButtonBuy type="button" id="button4">R$125,00</S.ButtonBuy>
     </S.ListProduct>
     <S.HomeContainer>
     <>
         <S.HeaderPrincipal>Deseja-se increver para receber as últimas promoções?</S.HeaderPrincipal>
     </>
       <S.Content>
-        <S.Input name="usuario" id="usuario" className="usuarioInput" value={usuario} placeholder="Usuário" onChange={e => setUsuario(e.target.value)}/>
-        <S.Button type="button" onClick={handlePesquisa}>cadastrar</S.Button>
+        <S.Input name="usuario" id="usuario" className="usuarioInput" value={usuario} placeholder="E-mail" onChange={e => setUsuario(e.target.value)}/>
+        <S.Button type="button" id="button1" onClick={cadastro}>cadastrar</S.Button>
       </S.Content>
       {erro ? <S.ErrorMsg>Ocorreu um erro! Tente novamente</S.ErrorMsg> : ''}
     </S.HomeContainer>

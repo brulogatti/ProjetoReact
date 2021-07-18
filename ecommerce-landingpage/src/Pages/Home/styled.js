@@ -25,6 +25,7 @@ border-radius: 0 .25rem .25rem 0;
     outline: none;
     box-shadow: none;
 }
+cursor: pointer;
 `
 
 export const Content = styled.div`
@@ -143,6 +144,22 @@ height: 50px;
 margin: 10px;
 padding: 25px;
 border: 5px solid black;
+`;
+
+export const ButtonBuy = styled.button`
+font-size: 50px;
+font-family: sans-serif;
+background: #ff6347 ;
+color: #fff;
+text-align: center;
+width: 410px;
+height: 100px;
+margin: 10px;
+padding: 25px;
+border: 5px solid black;
+border-radius: 0.5rem;
+box-shadow: inset 0 0 1em gold;
+cursor: pointer;
 `;
 
 
